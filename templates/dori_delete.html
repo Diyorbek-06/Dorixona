@@ -1,0 +1,75 @@
+<!-- dori_list.html -->
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💊 Dorilar Roʻyxati</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h2 class="text-center text-primary mb-4">💊 Dorilar Roʻyxati</h2>
+        <form method="GET" class="mb-4">
+            <input type="text" name="q" class="form-control" placeholder="🔍 Dori qidirish...">
+        </form>
+        <div class="list-group">
+            {% for dori in dorilar %}
+                <a href="{% url 'dori-detail' dori.pk %}" class="list-group-item list-group-item-action">
+                    <strong>{{ dori.nomi }}</strong> - 💰 {{ dori.price }} soʻm
+                </a>
+            {% endfor %}
+        </div>
+        <a href="{% url 'dori-create' %}" class="btn btn-success mt-3">➕ Yangi Dori Qoʻshish</a>
+    </div>
+</body>
+</html>
+
+<!-- dori_detail.html -->
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>💊 Dori Tafsilotlari</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="card shadow-lg p-4">
+            <h2 class="text-center text-primary">{{ dori.nomi }}</h2>
+            <p><strong>💰 Narxi:</strong> {{ dori.price }} soʻm</p>
+            <p><strong>📅 Tugash muddati:</strong> {{ dori.tugash_muddati }}</p>
+            <p><strong>🏭 Ishlab chiqaruvchi:</strong> {{ dori.make }}</p>
+            <p><strong>🔍 Xususiyatlari:</strong> {{ dori.xususiyat }}</p>
+            <a href="{% url 'dori-update' dori.pk %}" class="btn btn-warning">✏️ Tahrirlash</a>
+            <a href="{% url 'dori-delete' dori.pk %}" class="btn btn-danger">🗑️ Oʻchirish</a>
+            <a href="{% url 'dori-list' %}" class="btn btn-secondary">⬅️ Ortga</a>
+        </div>
+    </div>
+</body>
+</html>
+
+<!-- dori_delete.html -->
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>💊 Dorini Oʻchirish</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+    <div class="container">
+        <div class="card shadow-lg p-4 bg-white rounded text-center">
+            <h2 class="text-danger">⚠️ {{ dori.nomi }} dorisini oʻchirishni xohlaysizmi?</h2>
+            <p><strong>💰 Narxi:</strong> {{ dori.price }} soʻm</p>
+            <p><strong>📅 Tugash muddati:</strong> {{ dori.tugash_muddati }}</p>
+            <p><strong>🏭 Ishlab chiqaruvchi:</strong> {{ dori.make }}</p>
+            <form method="POST" action="{% url 'dori-delete' dori.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">✅ Ha, oʻchirish</button>
+            </form>
+            <a href="{% url 'dori-detail' dori.pk %}" class="btn btn-secondary">❌ Yoʻq, bekor qilish</a>
+        </div>
+    </div>
+</body>
+</html>

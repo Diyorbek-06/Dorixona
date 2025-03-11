@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Seach</title>
+</head>
+<body>
+<h1>Search</h1>
+<form>
+    <input type="text" name="t" placeholder="Search">
+    <input type="submit"> Qidirish</button>
+    </form>
+
+{% if  dorilar %}
+    <h2>Axtarilgan malumotlar</h2>
+    {% for dori in dorilar %}
+        <h2>{{dori.nomi}}</h2>
+    {%endfor %}
+{% else %}
+    <h2>malumot yoq</h2>
+{% endif %}
+
+</body>
+</html>
