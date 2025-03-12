@@ -12,7 +12,7 @@ class Dori(models.Model):
     chiqarilgan_vaqt = models.DateField(auto_now_add=True)
     tugash_muddati = models.DateField()
     create_at = models.DateTimeField(auto_now_add=True)
-
+    image = models.ImageField(upload_to='dorilar/', blank=True, null=True)
 
     class Meta:
         ordering = ['-create_at']

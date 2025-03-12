@@ -1,7 +1,10 @@
+from tkinter.font import names
+
 from django.urls import path
-from .views import  DoriList, DoriDetail, DoriCreate, DoriUpdate, DoriDelete
+from .views import  DoriList, DoriDetail, DoriCreate, DoriUpdate, DoriDelete, home_page
 urlpatterns = [
-    path('', DoriList.as_view(), name='dori-list'),
+    path('', home_page, name='home'),
+    path('list/', DoriList.as_view(), name='dori-list'),
     path('dori/<int:pk>', DoriDetail.as_view(), name='dori-detail'),
     path('dori-create', DoriCreate.as_view(), name='dori-create'),
     path('dori-update/<int:pk>/', DoriUpdate.as_view(), name='dori-update'),

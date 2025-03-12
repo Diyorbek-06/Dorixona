@@ -31,6 +31,7 @@
                         <thead class="table-primary">
                             <tr>
                                 <th>#</th>
+                                <th>📸 Rasm</th>
                                 <th>💊 Nomi</th>
                                 <th>🏭 Ishlab chiqaruvchi</th>
                                 <th>💰 Narxi</th>
@@ -43,6 +44,13 @@
                             {% for dori in dorilar %}
                             <tr>
                                 <td>{{ forloop.counter }}</td>
+                                <td>
+                                    {% if dori.image %}
+                                        <img src="{{ dori.image.url }}" alt="{{ dori.nomi }}" class="img-thumbnail" style="width: 80px; height: 80px;">
+                                    {% else %}
+                                        <span class="text-muted">🚫 Rasm yo‘q</span>
+                                    {% endif %}
+                                </td>
                                 <td><a href="{% url 'dori-detail' dori.pk %}" class="text-decoration-none text-dark fw-bold">{{ dori.nomi }}</a></td>
                                 <td>{{ dori.make }}</td>
                                 <td>${{ dori.price }}</td>

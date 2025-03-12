@@ -16,6 +16,21 @@
             <form method="POST" enctype="multipart/form-data" class="row g-3">
                 {% csrf_token %}
 
+                <!-- Dori rasmi (mavjud bo'lsa ko'rsatish) -->
+                <div class="col-12 text-center">
+                    {% if dori.image %}
+                        <img src="{{ dori.image.url }}" alt="{{ dori.nomi }}" class="img-fluid rounded shadow-sm mb-3" style="max-width: 200px; height: auto;">
+                    {% else %}
+                        <p class="text-muted">🚫 Rasm mavjud emas</p>
+                    {% endif %}
+                </div>
+
+                <!-- Rasm yuklash -->
+                <div class="col-12">
+                    <label for="image" class="form-label">🖼 Rasm yuklash:</label>
+                    <input type="file" id="image" name="image" class="form-control">
+                </div>
+
                 <div class="col-md-6">
                     <label for="make" class="form-label">🏭 Ishlab chiqaruvchi:</label>
                     <input type="text" id="make" name="make" value="{{ dori.make }}" class="form-control" required>

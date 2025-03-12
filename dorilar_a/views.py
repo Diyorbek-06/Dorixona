@@ -8,6 +8,12 @@ from .forms import DoriForm
 # Create your views here.
 
 
+def home_page(request):
+    return render(request, 'home.html')
+
+
+
+
 
 class DoriList(View):
     def get(self, request):
@@ -16,11 +22,6 @@ class DoriList(View):
         return render(request, 'dori_list.html', {'dorilar':dorilar})
 
 
-
-# class DoriList(ListView):
-#     model = Dori
-#     template_name = 'dori_list.html'
-#     context_object_name = 'dorilar'
 
 class DoriDetail(DetailView):
     model = Dori
@@ -42,8 +43,8 @@ class DoriCreate(CreateView):
 
 class DoriUpdate(UpdateView):
     model = Dori
-    template_name = 'dori_form.html'
-    fields = ['make', 'nomi', 'price', 'xususiyat', 'miqdori', 'tugash_muddati']
+    template_name = 'dori_update.html'
+    fields = ['make', 'nomi', 'price', 'xususiyat', 'miqdori', 'tugash_muddati', 'image']
 
     def get_success_url(self):
         return reverse_lazy('dori-detail', kwargs={'pk': self.object.pk})
