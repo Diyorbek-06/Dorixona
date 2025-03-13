@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import AuthenticationForm
-
+from .models import Profile
 
 class RegisterForm(forms.ModelForm):
     confirm_password = forms.CharField(max_length=200, required=True, widget=forms.PasswordInput())
@@ -34,3 +34,18 @@ class LoginForm(AuthenticationForm):
         if not User.objects.filter(username=username).exists():
             raise ValidationError('Bunday username yoki password topilmadi!')
         return username
+
+
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['image']
+
