@@ -32,5 +32,5 @@ class LoginForm(AuthenticationForm):
     def clean_username(self):
         username = self.cleaned_data['username']
         if not User.objects.filter(username=username).exists():
-            raise ValidationError('User with this username does not exist.')
+            raise ValidationError('Bunday username yoki password topilmadi!')
         return username
